@@ -11,17 +11,15 @@
 
     <title>{% block title %} {% endblock %}</title>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="{% static 'css/base_styles.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
-
+    <link href="{% static 'css/bootstrap.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
 </head>
 
 <body>
     <div class="content">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Logo</a>
+                <a class="navbar-brand" href="{% url 'cars' %}">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -44,7 +42,7 @@
             </div>
         </nav>
 
-        <main class="main container mt-5">
+        <main class="main container mt-3">
             {% block main %} {% endblock %}
         </main>
 

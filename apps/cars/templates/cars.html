@@ -1,3 +1,85 @@
-{% extends 'base.html' %} {% block title %} Cadastro produto {% endblock %} {% block main %}
-    <h1>Deu bom!</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Cadastro produto {% endblock %}
+
+{% block main %}
+    <h1 class="mb-4 d-flex justify-content-center">Lista de Carros</h1>
+
+    <form method="GET" action="{% url 'cars' %}" class="mb-4 d-flex justify-content-center">
+        <input type="text" name="search" placeholder="Buscar modelo..." class="form-control mr-2" value="{{ request.GET.search }}">
+        <button type="submit" class="btn btn-dark">Buscar</button>
+    </form>
+
+    <div class="row">
+        {% if cars %}
+            {% for car in cars %}
+            <div class="col-md-4 mb-4">
+                <div class="card text-center shadow bg-body rounded">
+                    {% if car.image %}
+                    <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.model }}">
+                    {% else %}
+                    <img src="{% static 'path/to/default/image.jpg' %}" class="card-img-top" alt="Imagem não disponível">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ car.model }}</h5>
+                        <p class="card-text">Marca: {{ car.brand }}</p>
+                        <p class="card-text">Ano de Fabricação: {{ car.factory_year }}</p>
+                        <p class="card-text">Ano do Modelo: {{ car.model_year }}</p>
+                        <p class="card-text">Placa: {{ car.plate }}</p>
+                        <p class="card-text">Valor: R${{ car.value }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center">
+                <p>Nenhum carro encontrado.</p>
+            </div>
+        {% endif %}
+    </div>
+
+     <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {% if cars.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ cars.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&laquo;&laquo;</span></li>
+                    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+                {% for num in cars.paginator.page_range %}
+                    {% if cars.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% elif num > cars.number|add:'-3' and num < cars.number|add:'3' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if cars.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ cars.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ cars.paginator.num_pages }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                    <li class="page-item disabled"><span class="page-link">&raquo;&raquo;</span></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 {% endblock %}

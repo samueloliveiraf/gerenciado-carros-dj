@@ -8,7 +8,7 @@ from apps.cars import urls as urls_cars
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cars/', include(urls_cars)),
+    path('', include(urls_cars)),
 ] + static(
     settings.MEDIA_URL, 
     document_root=settings.MEDIA_ROOT
