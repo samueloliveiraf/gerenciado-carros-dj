@@ -1,6 +1,6 @@
 from django.db import models
 
-from core.models import BaseModel
+from apps.core.models import BaseModel
 
 
 class Brand(BaseModel):
