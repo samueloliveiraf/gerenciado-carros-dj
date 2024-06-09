@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Detalhamento Carro {% endblock %}
+
+{% block main %}
+    <h1 class="mb-4 d-flex justify-content-center">Detalhes do carro</h1>
+
+    <!-- Exibir informações do carro -->
+    <div class="col-md-12 mb-12">
+        <div class="card text-center shadow bg-body rounded mb-4">
+            {% if car.image %}
+                <img src="{{ car.image.url }}" class="card-img-top" alt="{{ car.model }}">
+            {% else %}
+                <img src="{% static 'path/to/default/image.jpg' %}" class="card-img-top" alt="Imagem não disponível">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ car.model }}</h5>
+                <p class="card-text">Marca: {{ car.brand }}</p>
+                <p class="card-text">Ano de Fabricação: {{ car.factory_year }}</p>
+                <p class="card-text">Ano do Modelo: {{ car.model_year }}</p>
+                <p class="card-text">Placa: {{ car.plate }}</p>
+                <p class="card-text">Valor: R${{ car.value }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botões de atualizar e deletar (se logado) -->
+    {% if user.is_authenticated %}
+        <div class="container mt-4 d-flex justify-content-center mb-4">
+            <a href="{% url 'car_update' car.pk %}" class="btn btn-dark">Atualizar</a>
+            <p style="margin-left: 8px"> </p>
+            <a href="{% url 'car_delete' car.pk %}" class="btn btn-danger">Deletar</a>
+        </div>
+    {% endif %}
+{% endblock %}

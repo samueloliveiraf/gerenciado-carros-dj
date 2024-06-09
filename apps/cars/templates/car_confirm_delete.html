@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Deletar Carro{% endblock %}
+
+{% block main %}
+    <h1 class="d-flex justify-content-center">Tem certeza que deseja deletar?</h1>
+    <div class="container d-flex justify-content-center">
+        <p>{{ car.model }}?</p>
+        {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-dark" type="submit">Confirmar</button>
+            <a class="btn btn-primary" href="{% url 'car_detail' car.pk %}">Cancelar</a>
+        </form>
+        {% else %}
+        <p>Você precisa estar logado para confirmar a exclusão.</p>
+        <a class="btn btn-primary" href="{% url 'login' %}">Faça Login</a>
+        {% endif %}
+    </div>
+{% endblock %}

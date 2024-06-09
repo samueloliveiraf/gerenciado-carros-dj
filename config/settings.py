@@ -46,7 +46,8 @@ THIRD_APPS = [
 ]
 
 PROJECT_APPS = [
-    'apps.cars.apps.CarsConfig'
+    'apps.cars.apps.CarsConfig',
+    'apps.accounts.apps.AccountsConfig'
 ]
 
 INSTALLED_APPS = PROJECT_APPS + THIRD_APPS + DEFAULT_APPS
@@ -149,7 +150,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-LOGIN_REDIRECT_URL = 'dashboard'
+LOGIN_REDIRECT_URL = 'cars'
 
 LOGOUT_REDIRECT_URL = 'login'
 

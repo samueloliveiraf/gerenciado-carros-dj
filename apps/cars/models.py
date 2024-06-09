@@ -49,3 +49,16 @@ class Car(BaseModel):
     class Meta:
         verbose_name = 'Carro'
         verbose_name_plural = 'Carros'
+
+
+class CarInventory(BaseModel):
+    cars_count = models.IntegerField()
+    cars_values = models.FloatField()
+
+    def __str__(self):
+        return f'{self.cars_count} - {self.cars_values}'
+
+    class Meta:
+        verbose_name = 'Inventário'
+        verbose_name_plural = 'Inventários'
+        ordering = ['-created_at']
