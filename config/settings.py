@@ -41,7 +41,8 @@ DEFAULT_APPS = [
 ]
 
 THIRD_APPS = [
-
+    'crispy_forms',
+    'crispy_bootstrap4',
 ]
 
 PROJECT_APPS = [
@@ -62,6 +63,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {

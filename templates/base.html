@@ -16,70 +16,67 @@
 </head>
 
 <body>
-    <div class="content">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'cars' %}">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+<div class="content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'cars' %}">Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page"
+                           href="{% url 'cars' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if '/cars/new/' in request.path %}active{% endif %}"
+                           href="{% url 'car_create_view' %}">Novo Carro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main container mt-3">
+        {% block main %} {% endblock %}
+    </main>
+
+    <footer class="bg-dark text-center text-lg-start mt-auto">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Footer Content</h5>
+                    <p>Aqui você pode usar linhas e colunas para organizar seu conteúdo no footer.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Links</h5>
+                    <ul class="list-unstyled mb-0 footer-links">
+                        <li>
+                            <a href="#!">Link 1</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sobre</a>
+                        <li>
+                            <a href="#!">Link 2</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Serviços</a>
+                        <li>
+                            <a href="#!">Link 3</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Contato</a>
+                        <li>
+                            <a href="#!">Link 4</a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </div>
+        <div class="text-center p-3 text-light-emphasis" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2024 Copyright:
+            <a class="text-light-emphasis" href="#">SuaEmpresa.com</a>
+        </div>
+    </footer>
+</div>
 
-        <main class="main container mt-3">
-            {% block main %} {% endblock %}
-        </main>
-
-        <footer class="bg-dark text-center text-lg-start mt-auto">
-            <div class="container p-4">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Footer Content</h5>
-                        <p>Aqui você pode usar linhas e colunas para organizar seu conteúdo no footer.</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Links</h5>
-                        <ul class="list-unstyled mb-0 footer-links">
-                            <li>
-                                <a href="#!">Link 1</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 2</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 3</a>
-                            </li>
-                            <li>
-                                <a href="#!">Link 4</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center p-3 text-light-emphasis" style="background-color: rgba(0, 0, 0, 0.2);">
-                © 2024 Copyright:
-                <a class="text-light-emphasis" href="#">SuaEmpresa.com</a>
-            </div>
-        </footer>
-    </div>
-
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 
 </html>

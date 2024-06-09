@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
+from .forms import CarForm
 from .models import Car
 
 
@@ -22,3 +23,15 @@ def cars_views(request):
         'cars.html',
         context=context
     )
+
+
+def car_create_view(request):
+    if request.method == 'POST':
+        form = CarForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('cars')
+    else:
+        form = CarForm()
+
+    return render(request, 'new_car.html', {'form': form})
